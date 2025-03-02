@@ -84,11 +84,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScoreList.cs" />
     <EmbeddedResource Include="Bai1.resx">
       <DependentUpon>Bai1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Bai2.resx">
       <DependentUpon>Bai2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bai5.resx">
+      <DependentUpon>Bai5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
