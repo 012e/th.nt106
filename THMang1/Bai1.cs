@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,49 +18,106 @@ namespace THMang1
             InitializeComponent();
         }
 
-        private void ResetResult()
-        {
-            textBox3.Text = "";
-        }
-
-        private void SetResult(int n)
-        {
-            textBox3.Text = n.ToString();
-        }
-
-
-        private void Bai1_Load(object sender, EventArgs e)
-        {
-
-        }
+        private string CurrentContent = null;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!Int32.TryParse(textBox1.Text, out int num1))
+            try
             {
-                MessageBox.Show("Số thứ nhất không phải là số nguyên, hãy nhập lại.");
-                return;
-            }
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "All Files|*.*";
+                    openFileDialog.Title = "Select a file to open";
 
-            if (!Int32.TryParse(textBox2.Text, out int num2))
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        if (string.IsNullOrWhiteSpace(filePath))
+                            throw new Exception("Invalid file path.");
+
+                        try
+                        {
+                            using (StreamReader reader = new StreamReader(filePath))
+                            {
+                                string fileContent = reader.ReadToEnd();
+                                if (!fileContent.IsPrintable())
+                                {
+                                    MessageBox.Show("The file is not a valid UTF-8 file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                richTextBox1.Text = fileContent;
+                                CurrentContent = fileContent;
+                            }
+                        }
+                        catch (UnauthorizedAccessException)
+                        {
+                            MessageBox.Show("You do not have permission to access this file.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (IOException ioEx)
+                        {
+                            MessageBox.Show($"I/O Error: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Số thứ hai không phải là số nguyên, hãy nhập lại.");
-                return;
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            SetResult(num1 + num2);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ResetResult();
-            textBox1.Text = "";
-            textBox2.Text = "";
-        }
+            if (CurrentContent == null)
+            {
+                MessageBox.Show("No file selected yet, exiting!");
+                return;
+            }
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
+                    saveFileDialog.Title = "Save a file";
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Close();
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = saveFileDialog.FileName;
+
+                        if (string.IsNullOrWhiteSpace(filePath))
+                            throw new Exception("Invalid file path.");
+
+                        try
+                        {
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+                                writer.Write(CurrentContent.ToUpper());
+                            }
+                            MessageBox.Show("File successfully saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (UnauthorizedAccessException)
+                        {
+                            MessageBox.Show("You do not have permission to write to this file.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (IOException ioEx)
+                        {
+                            MessageBox.Show($"I/O Error: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
