@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,69 +17,51 @@ namespace THMang1
         public Bai5()
         {
             InitializeComponent();
+            SetupLsView();
         }
 
-        private void DisplayScores(List<double> scores)
+        private void SetupLsView()
         {
-            tableLayoutPanel1.Controls.Clear();
-            int row = 0;
-            int col = 0;
-            for (int i = 0; i < scores.Count; ++i)
-            {
-                double score = scores[i];
-                string s = $"Môn {i + 1}: {score.ToString("F2")}đ";
-                Label lbl = new Label { Text = s, AutoSize = true };
-                tableLayoutPanel1.Controls.Add(lbl, col, row);
+            LsView.View = View.Details;
+            LsView.FullRowSelect = true;
+            LsView.Columns.Add("Tên file", 300);
+            LsView.Columns.Add("Kích thước", 150);
+            LsView.Columns.Add("Đuôi mở rộng", 100);
+            LsView.Columns.Add("Ngày tạo", 200);
+        }
 
-                col++;
-                if (col >= tableLayoutPanel1.ColumnCount)  // Move to next column when row limit is reached
+        private void BtnGetFolder_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
                 {
-                    row++;
-                    col = 0;
+                    txtPath.Text = fbd.SelectedPath;
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnGetFiles_Click(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrWhiteSpace(txtPath.Text) || !Directory.Exists(txtPath.Text))
             {
-                var scores = ScoreList.FromString(input.Text);
-                DisplayScores(scores.Scores);
-
-                DisplayScoreDetails(scores);
+                MessageBox.Show("Vui lòng chọn thư mục hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex)
+
+            LsView.Items.Clear();
+            DirectoryInfo di = new DirectoryInfo(txtPath.Text);
+            FileInfo[] files = di.GetFiles();
+
+            foreach (FileInfo file in files)
             {
-                MessageBox.Show(ex.Message);
-                ResetData();
+                ListViewItem item = new ListViewItem(file.Name);
+                item.SubItems.Add(file.Length.ToString());
+                item.SubItems.Add(file.Extension);
+                item.SubItems.Add(file.CreationTime.ToString());
+
+                LsView.Items.Add(item);
             }
-        }
-
-        private void ResetData()
-        {
-            tableLayoutPanel1.Controls.Clear();
-            txtTB.Text = "";
-            txtMax.Text = "";
-            txtPass.Text = "";
-            txtGrade.Text = "";
-            txtMin.Text = "";
-            txtFailed.Text = "";
-        }
-
-        private void DisplayScoreDetails(ScoreList scores)
-        {
-            txtTB.Text = scores.GetAverage().ToString("F2");
-            txtMax.Text = scores.GetMax().ToString("F2") + "đ";
-            txtPass.Text = scores.GetPassedCount().ToString();
-            txtGrade.Text = scores.GetClassification().ToString();
-            txtMin.Text = scores.GetMin().ToString("F2") + "đ";
-            txtFailed.Text = scores.GetFailedCount().ToString();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
