@@ -83,6 +83,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="UdpClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UdpClientForm.Designer.cs">
+      <DependentUpon>UdpClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UdpServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UdpServerForm.Designer.cs">
+      <DependentUpon>UdpServerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumberToVietnameseConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +127,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UdpClientForm.resx">
+      <DependentUpon>UdpClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UdpServerForm.resx">
+      <DependentUpon>UdpServerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
