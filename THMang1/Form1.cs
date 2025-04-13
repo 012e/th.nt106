@@ -40,11 +40,5 @@ namespace THMang1
             Bai4 f = new Bai4();
             f.Show();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Bai5 f = new Bai5();
-            f.Show();
-        }
     }
 }
