@@ -77,14 +77,39 @@ namespace THMang1
 
         private void Log(string message)
         {
-            txtMess.AppendText(message + Environment.NewLine);
+            try
+            {
+                if (txtMess.IsHandleCreated && !txtMess.IsDisposed)
+                {
+                    if (txtMess.InvokeRequired)
+                    {
+                        txtMess.Invoke(new Action(() =>
+                        {
+                            if (!txtMess.IsDisposed) // kiểm tra lại trong Invoke
+                                txtMess.AppendText(message + Environment.NewLine);
+                        }));
+                    }
+                    else
+                    {
+                        txtMess.AppendText(message + Environment.NewLine);
+                    }
+                }
+            }
+            catch
+            {
+                // bỏ qua nếu form đã bị đóng
+            }
         }
 
-        private void UdpServerForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void UdpServerForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
             running = false;
-            udpServer?.Close();
-            receiveThread?.Join();
+
+            udpServer?.Close(); // đóng socket trước
+            udpServer?.Dispose();
+
+            if (receiveThread != null && receiveThread.IsAlive)
+                receiveThread.Join(1000); // cho thread 1s để thoát
         }
     }
 }

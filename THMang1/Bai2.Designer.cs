@@ -60,6 +60,7 @@
             this.Controls.Add(this.txtMess);
             this.Name = "Bai2";
             this.Text = "Bai2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bai2_FormClosing);
             this.ResumeLayout(false);
 
         }

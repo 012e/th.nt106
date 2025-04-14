@@ -92,10 +92,31 @@ namespace THMang1
 
         private void Log(string message)
         {
-            txtMess.AppendText(message + Environment.NewLine);
+            try
+            {
+                if (txtMess.IsHandleCreated && !txtMess.IsDisposed)
+                {
+                    if (txtMess.InvokeRequired)
+                    {
+                        txtMess.Invoke(new Action(() =>
+                        {
+                            if (!txtMess.IsDisposed) // kiểm tra lại trong Invoke
+                                txtMess.AppendText(message + Environment.NewLine);
+                        }));
+                    }
+                    else
+                    {
+                        txtMess.AppendText(message + Environment.NewLine);
+                    }
+                }
+            }
+            catch
+            {
+                // bỏ qua nếu form đã bị đóng
+            }
         }
 
-        private void TelnetListenerForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void Bai2_FormClosing(object sender, FormClosingEventArgs e)
         {
             isListening = false;
             try

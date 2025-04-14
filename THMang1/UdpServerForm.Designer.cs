@@ -90,6 +90,7 @@
             this.Controls.Add(this.txtPort);
             this.Name = "UdpServerForm";
             this.Text = "UdpServer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UdpServerForm_FormClosing_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
