@@ -28,43 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSource = new System.Windows.Forms.Button();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.txtUrl = new System.Windows.Forms.TextBox();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
-            // button2
+            // btnSource
             // 
-            this.button2.Location = new System.Drawing.Point(12, 174);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(209, 141);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Server";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnSource.Location = new System.Drawing.Point(1036, 12);
+            this.btnSource.Name = "btnSource";
+            this.btnSource.Size = new System.Drawing.Size(62, 53);
+            this.btnSource.TabIndex = 2;
+            this.btnSource.Text = "Source";
+            this.btnSource.UseVisualStyleBackColor = true;
+            this.btnSource.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // btnBrowse
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 141);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Client";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBrowse.Location = new System.Drawing.Point(968, 12);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(62, 53);
+            this.btnBrowse.TabIndex = 1;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtUrl
+            // 
+            this.txtUrl.Location = new System.Drawing.Point(12, 27);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(950, 22);
+            this.txtUrl.TabIndex = 0;
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(12, 71);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(1086, 600);
+            this.webBrowser.TabIndex = 3;
             // 
             // Bai4
             // 
-            this.ClientSize = new System.Drawing.Size(231, 322);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1110, 683);
+            this.Controls.Add(this.webBrowser);
+            this.Controls.Add(this.txtUrl);
+            this.Controls.Add(this.btnSource);
+            this.Controls.Add(this.btnBrowse);
             this.Name = "Bai4";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSource;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.TextBox txtUrl;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }
