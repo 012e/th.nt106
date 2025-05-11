@@ -11,6 +11,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MailKit.Net.Imap;
+using MailKit.Search;
+using MailKit.Security;
+using MimeKit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace THMang1
 {
@@ -19,111 +24,63 @@ namespace THMang1
         public Bai2()
         {
             InitializeComponent();
+            lsvBody.View = View.Details;
+            lsvBody.Columns.Add("Email", 200);
+            lsvBody.Columns.Add("From", 100);
+            lsvBody.Columns.Add("Thời gian", 100);
         }
 
-        private Socket listenerSocket;
-        private Thread listenThread;
-        private bool isListening = false;
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private async void btnSend_Click(object sender, EventArgs e)
         {
-            if (!isListening)
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                listenThread = new Thread(StartListening);
-                listenThread.IsBackground = true;
-                listenThread.Start();
-                isListening = true;
-                Log("Đang lắng nghe trên cổng 8080...");
-                btnListen.Enabled = false;
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-        }
 
-        private void StartListening()
-        {
             try
             {
-                IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 8080);
-                listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                listenerSocket.Bind(localEndPoint);
-                listenerSocket.Listen(10);
-
-                while (isListening)
+                using (var client = new ImapClient())
                 {
-                    Socket clientSocket = listenerSocket.Accept();
-                    Thread clientThread = new Thread(() => HandleClient(clientSocket));
-                    clientThread.IsBackground = true;
-                    clientThread.Start();
+                    // Kết nối tới MDaemon
+                    await client.ConnectAsync("127.0.0.1", 143, SecureSocketOptions.None);
+
+                    // Đăng nhập
+                    await client.AuthenticateAsync(email, password);
+
+                    // Mở hộp thư đến
+                    var inbox = client.Inbox;
+                    await inbox.OpenAsync(MailKit.FolderAccess.ReadOnly);
+
+                    labTotal.Text = $"Total: {inbox.Count}";
+
+                    var today = DateTime.Today;
+                    var recentMessages = await inbox.SearchAsync(SearchQuery.DeliveredAfter(today));
+                    labRecent.Text = $"Recent: {recentMessages.Count}";
+
+                    lsvBody.Items.Clear();
+
+                    foreach (var index in inbox.Search(SearchQuery.All))
+                    {
+                        var message = inbox.GetMessage(index);
+
+                        var item = new ListViewItem(message.Subject ?? "(Không tiêu đề)");
+                        item.SubItems.Add(message.From.Mailboxes.FirstOrDefault()?.Address ?? "");
+                        item.SubItems.Add(message.Date.ToLocalTime().ToString("dd/MM/yyyy HH:mm"));
+                        lsvBody.Items.Add(item);
+                    }
+
+                    await client.DisconnectAsync(true);
                 }
             }
             catch (Exception ex)
             {
-                Log("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi khi đăng nhập hoặc đọc thư: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void HandleClient(Socket clientSocket)
-        {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-
-            try
-            {
-                while ((bytesRead = clientSocket.Receive(buffer)) > 0)
-                {
-                    string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Invoke(new Action(() =>
-                    {
-                        Log("Nhận từ Telnet: " + message);
-                    }));
-                }
-            }
-            catch (SocketException se)
-            {
-                Invoke(new Action(() =>
-                {
-                    Log("Client ngắt kết nối: " + se.Message);
-                }));
-            }
-            finally
-            {
-                clientSocket.Close();
-            }
-        }
-
-        private void Log(string message)
-        {
-            try
-            {
-                if (txtMess.IsHandleCreated && !txtMess.IsDisposed)
-                {
-                    if (txtMess.InvokeRequired)
-                    {
-                        txtMess.Invoke(new Action(() =>
-                        {
-                            if (!txtMess.IsDisposed) // kiểm tra lại trong Invoke
-                                txtMess.AppendText(message + Environment.NewLine);
-                        }));
-                    }
-                    else
-                    {
-                        txtMess.AppendText(message + Environment.NewLine);
-                    }
-                }
-            }
-            catch
-            {
-                // bỏ qua nếu form đã bị đóng
-            }
-        }
-
-        private void Bai2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            isListening = false;
-            try
-            {
-                listenerSocket?.Close();
-            }
-            catch { }
+        
         }
     }
 }
