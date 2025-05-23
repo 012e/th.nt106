@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using THMang1.Server;
 
 namespace THMang1
 {
@@ -15,6 +16,18 @@ namespace THMang1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new Server.Server();
+            form.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new Client.Client();
+            form.Show();
         }
     }
 }

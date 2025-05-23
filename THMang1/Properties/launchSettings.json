@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "THMang1": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "8080"
+      },
+      "applicationUrl": "https://localhost:52532;http://localhost:52533,http://localhost:8080"
+    }
+  }
+}
