@@ -3,7 +3,7 @@
     public partial class Client : Form
     {
         private GameClientSDK _gameClient;
-        private const string ServerUrl = "http://localhost:8080";
+        private const string ServerUrl = "http://localhost:8080/gameHub";
 
         private System.Windows.Forms.Timer _guessCooldownTimer;
         private int _countdownSeconds = 3;
