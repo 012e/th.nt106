@@ -1,110 +1,53 @@
-=== GAME ĐOÁN SỐ - Game History (2025-05-23 02:17:50 UTC) ===
-Total Rounds Played: 7 out of 7 planned.
+=== GAME ĐOÁN SỐ - Game History (2025-05-23 07:04:02 UTC) ===
+Total Rounds Played: 5 out of 5 planned.
 
 --- Round 1 ---
-Range: 16 < X < 116
-Secret Number: 40
-Started: 02:10:14
-Ended: 02:10:42
-Winner: Player18
+Range: 19 < X < 84
+Secret Number: 26
+Started: 07:03:11
+Ended: 07:03:32
+Winner: Player90
 Guesses:
-  - Player18: 20 (Too low.) at 02:10:25
-  - Player18: 50 (Too high.) at 02:10:31
-  - Player18: 30 (Too low.) at 02:10:37
-  - Player18: 40 (Correct) at 02:10:42
+  - Player90: 26 (Correct) at 07:03:32
 
 --- Round 2 ---
-Range: 15 < X < 58
-Secret Number: 43
-Started: 02:10:45
-Ended: 02:12:12
-Winner: Player48
+Range: 38 < X < 73
+Secret Number: 48
+Started: 07:03:35
+Ended: 07:03:44
+Winner: Player90
 Guesses:
-  - Player48: 16 (Too low.) at 02:11:02
-  - Player18: 16 (Too low.) at 02:11:05
-  - Player48: 20 (Too low.) at 02:11:42
-  - Player48: 30 (Too low.) at 02:11:46
-  - Player48: 50 (Too high.) at 02:11:52
-  - Player48: 40 (Too low.) at 02:11:55
-  - Player48: 45 (Too high.) at 02:11:58
-  - Player48: 48 (Too high.) at 02:12:02
-  - Player48: 42 (Too low.) at 02:12:05
-  - Player48: 41 (Too low.) at 02:12:08
-  - Player48: 43 (Correct) at 02:12:12
+  - Player90: 48 (Correct) at 07:03:44
 
 --- Round 3 ---
-Range: 35 < X < 144
-Secret Number: 69
-Started: 02:12:15
-Ended: 02:15:13
-Winner: Player48
+Range: 10 < X < 39
+Secret Number: 18
+Started: 07:03:47
+Ended: 07:03:50
+Winner: Player90
 Guesses:
-  - Player48: 50 (Too low.) at 02:14:52
-  - Player48: 80 (Too high.) at 02:14:56
-  - Player48: 70 (Too high.) at 02:14:59
-  - Player48: 65 (Too low.) at 02:15:04
-  - Player48: 68 (Too low.) at 02:15:09
-  - Player48: 69 (Correct) at 02:15:13
+  - Player90: 18 (Correct) at 07:03:50
 
 --- Round 4 ---
-Range: 3 < X < 77
-Secret Number: 53
-Started: 02:15:16
-Ended: 02:15:35
-Winner: Player48
+Range: 35 < X < 48
+Secret Number: 46
+Started: 07:03:53
+Ended: 07:03:56
+Winner: Player90
 Guesses:
-  - Player48: 34 (Too low.) at 02:15:20
-  - Player48: 60 (Too high.) at 02:15:25
-  - Player48: 55 (Too high.) at 02:15:28
-  - Player48: 50 (Too low.) at 02:15:32
-  - Player48: 53 (Correct) at 02:15:35
+  - Player90: 46 (Correct) at 07:03:56
 
 --- Round 5 ---
-Range: 12 < X < 72
-Secret Number: 36
-Started: 02:15:38
-Ended: 02:16:20
-Winner: Player48
+Range: 31 < X < 57
+Secret Number: 47
+Started: 07:03:59
+Ended: 07:04:02
+Winner: Player90
 Guesses:
-  - Player48: 40 (Too high.) at 02:15:41
-  - Player48: 55 (Too high.) at 02:15:46
-  - Player48: 50 (Too high.) at 02:15:51
-  - Player48: 48 (Too high.) at 02:15:54
-  - Player48: 45 (Too high.) at 02:15:57
-  - Player48: 43 (Too high.) at 02:16:01
-  - Player48: 41 (Too high.) at 02:16:04
-  - Player48: 30 (Too low.) at 02:16:10
-  - Player48: 35 (Too low.) at 02:16:13
-  - Player48: 37 (Too high.) at 02:16:16
-  - Player48: 36 (Correct) at 02:16:20
-
---- Round 6 ---
-Range: 14 < X < 140
-Secret Number: 23
-Started: 02:16:23
-Ended: 02:17:36
-Winner: Player48
-Guesses:
-  - Player48: 100 (Too high.) at 02:17:14
-  - Player48: 75 (Too high.) at 02:17:21
-  - Player48: 30 (Too high.) at 02:17:25
-  - Player48: 20 (Too low.) at 02:17:28
-  - Player48: 25 (Too high.) at 02:17:32
-  - Player48: 23 (Correct) at 02:17:36
-
---- Round 7 ---
-Range: 1 < X < 15
-Secret Number: 7
-Started: 02:17:39
-Ended: 02:17:50
-Winner: Player48
-Guesses:
-  - Player48: 10 (Too high.) at 02:17:43
-  - Player48: 5 (Too low.) at 02:17:46
-  - Player48: 7 (Correct) at 02:17:50
+  - Player90: 47 (Correct) at 07:04:02
 
 --- Player Stats ---
-- Player48: 6 wins, 35 incorrect guesses, Score: 0
-- Player18: 1 wins, 4 incorrect guesses, Score: 0
+- Player90: 5 wins, 0 incorrect guesses, Score: 0
+- Player35: 0 wins, 0 incorrect guesses, Score: 0
 
-Overall Winner: Player48
+Overall Winner: Player90

@@ -98,37 +98,47 @@
 
         private Task OnJoinFailed(string reason)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.IsHandleCreated && !this.IsDisposed)
             {
-                lblStatus.Text = "Status: Join Failed";
-                AddMessageToLog($"Failed to join: {reason}");
-                MessageBox.Show($"Failed to join: {reason}", "Join Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtPlayerName.Enabled = true;
-                btnConnect.Text = "Connect";
-                btnConnect.Enabled = true;
-            });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    lblStatus.Text = "Status: Join Failed";
+                    AddMessageToLog($"Failed to join: {reason}");
+                    MessageBox.Show($"Failed to join: {reason}", "Join Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtPlayerName.Enabled = true;
+                    btnConnect.Text = "Connect";
+                    btnConnect.Enabled = true;
+                });
+            }
+
             return Task.CompletedTask;
         }
 
+
         private Task OnNewRoundStarted(int min, int max, int roundNum)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.IsHandleCreated && !this.IsDisposed)
             {
-                _isRoundCurrentlyActive = true;
-                _currentMinRange = min;
-                _currentMaxRange = max;
-                lblRangeInfo.Text = $"Range: {min} < X < {max}";
-                lblCurrentRound.Text = $"Round: {roundNum}";
-                AddMessageToLog($"--- New Round {roundNum} Started ---");
-                AddMessageToLog($"Guess between {min} and {max}.");
-                _autoGuessedNumbersInRound.Clear();
-                txtGuess.Clear();
-                ResetCountdown();
-                UpdateGuessingAvailability();
-                MaybeTriggerAutoPlay();
-            });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    _isRoundCurrentlyActive = true;
+                    _currentMinRange = min;
+                    _currentMaxRange = max;
+                    lblRangeInfo.Text = $"Range: {min} < X < {max}";
+                    lblCurrentRound.Text = $"Round: {roundNum}";
+                    AddMessageToLog($"--- New Round {roundNum} Started ---");
+                    AddMessageToLog($"Guess between {min} and {max}.");
+                    _autoGuessedNumbersInRound.Clear();
+                    txtGuess.Clear();
+                    ResetCountdown();
+                    UpdateGuessingAvailability();
+                    MaybeTriggerAutoPlay();
+                });
+            }
+
             return Task.CompletedTask;
         }
+
 
         private Task OnGuessFeedbackReceived(string feedback, bool isCorrect, bool isRoundOver, string? winnerName)
         {
@@ -162,10 +172,6 @@
                 _isRoundCurrentlyActive = false;
                 AddMessageToLog($"--- Round {roundNumberOfWinner} Over ---");
                 AddMessageToLog($"Winner: {winnerName}! The number was {secretNumber}.");
-                if (winnerName == txtPlayerName.Text)
-                {
-                    lblStatus.Text = "Status: You won this round!";
-                }
                 UpdateGuessingAvailability();
                 // Next round will be triggered by server if game is not over
             });
@@ -174,29 +180,42 @@
 
         private Task OnPlayerJoinedGame(string playerName, int playerCount)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.IsHandleCreated && !this.IsDisposed)
             {
-                AddMessageToLog($"{playerName} has joined the game. Total players: {playerCount}.");
-            });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    AddMessageToLog($"{playerName} has joined the game. Total players: {playerCount}.");
+                });
+            }
+
             return Task.CompletedTask;
         }
+
 
         private Task OnPlayerLeftGame(string playerName, int playerCount)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.IsHandleCreated && !this.IsDisposed)
             {
-                AddMessageToLog($"{playerName} has left the game. Total players: {playerCount}.");
-            });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    AddMessageToLog($"{playerName} has left the game. Total players: {playerCount}.");
+                });
+            }
+
             return Task.CompletedTask;
         }
 
+
         private Task OnPlayerGuessed(string playerName, int guessedNumber, string feedback)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.IsHandleCreated && !this.IsDisposed)
             {
-                // Optional: Display other players' guesses if desired, server sends this
-                // AddMessageToLog($"{playerName} guessed {guessedNumber}. ({feedback})");
-            });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // Optional: Display other players' guesses if desired, server sends this
+                    // AddMessageToLog($"{playerName} guessed {guessedNumber}. ({feedback})");
+                });
+            }
             return Task.CompletedTask;
         }
 
