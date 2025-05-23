@@ -50,13 +50,6 @@
             ColWinner = new DataGridViewTextBoxColumn();
             ColStartTime = new DataGridViewTextBoxColumn();
             ColEndTime = new DataGridViewTextBoxColumn();
-            gbCurrentRoundGuesses = new GroupBox();
-            dgvGuesses = new DataGridView();
-            ColPlayer = new DataGridViewTextBoxColumn();
-            ColGuess = new DataGridViewTextBoxColumn();
-            ColTimestamp = new DataGridViewTextBoxColumn();
-            ColCorrect = new DataGridViewTextBoxColumn();
-            ColFeedback = new DataGridViewTextBoxColumn();
             statusStrip = new StatusStrip();
             toolStripStatusLabel = new ToolStripStatusLabel();
             btnRefresh = new Button();
@@ -66,8 +59,6 @@
             gbPlayerInfo.SuspendLayout();
             gbGameHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvGameHistory).BeginInit();
-            gbCurrentRoundGuesses.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvGuesses).BeginInit();
             statusStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -87,7 +78,7 @@
             lblConnectionStatus.AutoSize = true;
             lblConnectionStatus.Location = new Point(6, 32);
             lblConnectionStatus.Name = "lblConnectionStatus";
-            lblConnectionStatus.Size = new Size(94, 20);
+            lblConnectionStatus.Size = new Size(99, 20);
             lblConnectionStatus.TabIndex = 1;
             lblConnectionStatus.Text = "Disconnected";
             // 
@@ -121,7 +112,7 @@
             lblGameStatus.AutoSize = true;
             lblGameStatus.Location = new Point(6, 167);
             lblGameStatus.Name = "lblGameStatus";
-            lblGameStatus.Size = new Size(114, 20);
+            lblGameStatus.Size = new Size(126, 20);
             lblGameStatus.TabIndex = 5;
             lblGameStatus.Text = "Game Status: N/A";
             // 
@@ -130,7 +121,7 @@
             lblTotalRounds.AutoSize = true;
             lblTotalRounds.Location = new Point(6, 137);
             lblTotalRounds.Name = "lblTotalRounds";
-            lblTotalRounds.Size = new Size(118, 20);
+            lblTotalRounds.Size = new Size(129, 20);
             lblTotalRounds.TabIndex = 4;
             lblTotalRounds.Text = "Total Rounds: N/A";
             // 
@@ -139,7 +130,7 @@
             lblCurrentRound.AutoSize = true;
             lblCurrentRound.Location = new Point(6, 107);
             lblCurrentRound.Name = "lblCurrentRound";
-            lblCurrentRound.Size = new Size(131, 20);
+            lblCurrentRound.Size = new Size(138, 20);
             lblCurrentRound.TabIndex = 3;
             lblCurrentRound.Text = "Current Round: N/A";
             // 
@@ -148,7 +139,7 @@
             lblMaxRange.AutoSize = true;
             lblMaxRange.Location = new Point(6, 77);
             lblMaxRange.Name = "lblMaxRange";
-            lblMaxRange.Size = new Size(108, 20);
+            lblMaxRange.Size = new Size(117, 20);
             lblMaxRange.TabIndex = 2;
             lblMaxRange.Text = "Max Range: N/A";
             // 
@@ -157,17 +148,17 @@
             lblMinRange.AutoSize = true;
             lblMinRange.Location = new Point(6, 47);
             lblMinRange.Name = "lblMinRange";
-            lblMinRange.Size = new Size(106, 20);
+            lblMinRange.Size = new Size(114, 20);
             lblMinRange.TabIndex = 1;
             lblMinRange.Text = "Min Range: N/A";
             // 
             // lblSecretNumber
             // 
             lblSecretNumber.AutoSize = true;
-            lblSecretNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSecretNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblSecretNumber.Location = new Point(6, 23);
             lblSecretNumber.Name = "lblSecretNumber";
-            lblSecretNumber.Size = new Size(154, 20);
+            lblSecretNumber.Size = new Size(153, 20);
             lblSecretNumber.TabIndex = 0;
             lblSecretNumber.Text = "Secret Number: N/A";
             // 
@@ -187,14 +178,13 @@
             lblPlayerCount.AutoSize = true;
             lblPlayerCount.Location = new Point(6, 23);
             lblPlayerCount.Name = "lblPlayerCount";
-            lblPlayerCount.Size = new Size(131, 20);
+            lblPlayerCount.Size = new Size(145, 20);
             lblPlayerCount.TabIndex = 1;
             lblPlayerCount.Text = "Connected Players: 0";
             // 
             // lbConnectedPlayers
             // 
             lbConnectedPlayers.FormattingEnabled = true;
-            lbConnectedPlayers.ItemHeight = 20;
             lbConnectedPlayers.Location = new Point(6, 46);
             lbConnectedPlayers.Name = "lbConnectedPlayers";
             lbConnectedPlayers.Size = new Size(373, 164);
@@ -220,7 +210,6 @@
             dgvGameHistory.Name = "dgvGameHistory";
             dgvGameHistory.ReadOnly = true;
             dgvGameHistory.RowHeadersWidth = 51;
-            dgvGameHistory.RowTemplate.Height = 29;
             dgvGameHistory.Size = new Size(837, 248);
             dgvGameHistory.TabIndex = 0;
             dgvGameHistory.SelectionChanged += dgvGameHistory_SelectionChanged;
@@ -273,70 +262,6 @@
             ColEndTime.ReadOnly = true;
             ColEndTime.Width = 150;
             // 
-            // gbCurrentRoundGuesses
-            // 
-            gbCurrentRoundGuesses.Controls.Add(dgvGuesses);
-            gbCurrentRoundGuesses.Location = new Point(403, 298);
-            gbCurrentRoundGuesses.Name = "gbCurrentRoundGuesses";
-            gbCurrentRoundGuesses.Size = new Size(849, 221);
-            gbCurrentRoundGuesses.TabIndex = 4;
-            gbCurrentRoundGuesses.TabStop = false;
-            gbCurrentRoundGuesses.Text = "Current Round Guesses";
-            // 
-            // dgvGuesses
-            // 
-            dgvGuesses.AllowUserToAddRows = false;
-            dgvGuesses.AllowUserToDeleteRows = false;
-            dgvGuesses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvGuesses.Columns.AddRange(new DataGridViewColumn[] { ColPlayer, ColGuess, ColTimestamp, ColCorrect, ColFeedback });
-            dgvGuesses.Location = new Point(6, 26);
-            dgvGuesses.Name = "dgvGuesses";
-            dgvGuesses.ReadOnly = true;
-            dgvGuesses.RowHeadersWidth = 51;
-            dgvGuesses.RowTemplate.Height = 29;
-            dgvGuesses.Size = new Size(837, 186);
-            dgvGuesses.TabIndex = 0;
-            // 
-            // ColPlayer
-            // 
-            ColPlayer.HeaderText = "Player";
-            ColPlayer.MinimumWidth = 6;
-            ColPlayer.Name = "ColPlayer";
-            ColPlayer.ReadOnly = true;
-            ColPlayer.Width = 150;
-            // 
-            // ColGuess
-            // 
-            ColGuess.HeaderText = "Guess";
-            ColGuess.MinimumWidth = 6;
-            ColGuess.Name = "ColGuess";
-            ColGuess.ReadOnly = true;
-            ColGuess.Width = 80;
-            // 
-            // ColTimestamp
-            // 
-            ColTimestamp.HeaderText = "Time";
-            ColTimestamp.MinimumWidth = 6;
-            ColTimestamp.Name = "ColTimestamp";
-            ColTimestamp.ReadOnly = true;
-            ColTimestamp.Width = 150;
-            // 
-            // ColCorrect
-            // 
-            ColCorrect.HeaderText = "Correct";
-            ColCorrect.MinimumWidth = 6;
-            ColCorrect.Name = "ColCorrect";
-            ColCorrect.ReadOnly = true;
-            ColCorrect.Width = 80;
-            // 
-            // ColFeedback
-            // 
-            ColFeedback.HeaderText = "Feedback";
-            ColFeedback.MinimumWidth = 6;
-            ColFeedback.Name = "ColFeedback";
-            ColFeedback.ReadOnly = true;
-            ColFeedback.Width = 325;
-            // 
             // statusStrip
             // 
             statusStrip.ImageScalingSize = new Size(20, 20);
@@ -350,7 +275,7 @@
             // toolStripStatusLabel
             // 
             toolStripStatusLabel.Name = "toolStripStatusLabel";
-            toolStripStatusLabel.Size = new Size(49, 20);
+            toolStripStatusLabel.Size = new Size(50, 20);
             toolStripStatusLabel.Text = "Ready";
             // 
             // btnRefresh
@@ -375,7 +300,6 @@
             ClientSize = new Size(1264, 553);
             Controls.Add(btnRefresh);
             Controls.Add(statusStrip);
-            Controls.Add(gbCurrentRoundGuesses);
             Controls.Add(gbGameHistory);
             Controls.Add(gbPlayerInfo);
             Controls.Add(gbGameInfo);
@@ -393,8 +317,6 @@
             gbPlayerInfo.PerformLayout();
             gbGameHistory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvGameHistory).EndInit();
-            gbCurrentRoundGuesses.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvGuesses).EndInit();
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
             ResumeLayout(false);
@@ -418,8 +340,6 @@
         private ListBox lbConnectedPlayers;
         private GroupBox gbGameHistory;
         private DataGridView dgvGameHistory;
-        private GroupBox gbCurrentRoundGuesses;
-        private DataGridView dgvGuesses;
         private StatusStrip statusStrip;
         private ToolStripStatusLabel toolStripStatusLabel;
         private Button btnRefresh;
@@ -430,10 +350,5 @@
         private DataGridViewTextBoxColumn ColWinner;
         private DataGridViewTextBoxColumn ColStartTime;
         private DataGridViewTextBoxColumn ColEndTime;
-        private DataGridViewTextBoxColumn ColPlayer;
-        private DataGridViewTextBoxColumn ColGuess;
-        private DataGridViewTextBoxColumn ColTimestamp;
-        private DataGridViewTextBoxColumn ColCorrect;
-        private DataGridViewTextBoxColumn ColFeedback;
     }
 }

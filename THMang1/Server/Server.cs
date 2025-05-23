@@ -351,22 +351,6 @@ namespace THMang1.Server
                 return;
 
             GameRound selectedRound = _latestData.FullGameHistory[_selectedRoundIndex];
-            gbCurrentRoundGuesses.Text = $"Guesses for Round {selectedRound.RoundNumber}";
-            
-            dgvGuesses.Rows.Clear();
-            
-            foreach (var guess in selectedRound.Guesses)
-            {
-                var row = new object[]
-                {
-                    guess.PlayerName,
-                    guess.GuessedNumber,
-                    guess.Timestamp.ToString("HH:mm:ss"),
-                    guess.IsCorrect ? "Yes" : "No",
-                    guess.Feedback
-                };
-                dgvGuesses.Rows.Add(row);
-            }
         }
 
         #endregion
