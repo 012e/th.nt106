@@ -23,5 +23,7 @@ namespace THMang1.Models
             TotalIncorrectGuesses = 0;
             Score = 0;
         }
+        
+        public Player() { }
     }
 }

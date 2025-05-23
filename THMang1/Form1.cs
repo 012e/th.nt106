@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using THMang1.Server;
+using THMang1.Server.Services;
 
 namespace THMang1
 {
@@ -16,6 +17,7 @@ namespace THMang1
         public Form1()
         {
             InitializeComponent();
+            BackendServer.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)

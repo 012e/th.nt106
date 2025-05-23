@@ -41,4 +41,6 @@ public class AdminDashboardData
 
         FullGameHistory = new List<GameRound>(gameService.GameHistory); // Create a copy
     }
+
+    public AdminDashboardData() { }
 }

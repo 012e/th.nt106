@@ -26,5 +26,7 @@ namespace THMang1.Models
             Guesses = new List<PlayerGuess>();
             StartTime = DateTime.UtcNow;
         }
+
+        public GameRound() { }
     }
 }

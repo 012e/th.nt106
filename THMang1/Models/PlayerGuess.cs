@@ -23,5 +23,6 @@ namespace THMang1.Models
             IsCorrect = isCorrect;
             Feedback = feedback;
         }
+        public PlayerGuess() { }
     }
 }

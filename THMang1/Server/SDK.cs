@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using THMang1.Models;
 
 namespace THMang1.Server;
 
@@ -11,49 +12,6 @@ public enum ConnectionStatus
     Reconnecting,
     Failed
 }
-
-// Placeholder for data models if not referenced from a shared library
-// Ensure these match the server-side definitions exactly.
-#region Data Models (Placeholders - Ideally reference from a shared library)
-// --- Models/PlayerGuess.cs ---
-public class PlayerGuess
-{
-    public string PlayerName { get; set; } = string.Empty;
-    public int GuessedNumber { get; set; }
-    public DateTime Timestamp { get; set; }
-    public bool IsCorrect { get; set; }
-    public string Feedback { get; set; } = string.Empty;
-}
-
-// --- Models/GameRound.cs ---
-public class GameRound
-{
-    public int RoundNumber { get; set; }
-    public int MinRange { get; set; }
-    public int MaxRange { get; set; }
-    public int SecretNumber { get; set; }
-    public string? WinnerName { get; set; }
-    public List<PlayerGuess> Guesses { get; set; } = new List<PlayerGuess>();
-    public DateTime StartTime { get; set; }
-    public DateTime? EndTime { get; set; }
-}
-
-// --- Models/AdminDashboardData.cs ---
-public class AdminDashboardData
-{
-    public int? CurrentTargetNumber { get; set; }
-    public int CurrentMinRange { get; set; }
-    public int CurrentMaxRange { get; set; }
-    public bool IsRoundActive { get; set; }
-    public int CurrentRoundNumber { get; set; }
-    public int TotalRoundsToPlay { get; set; }
-    public bool IsGameFinished { get; set; }
-    public string? OverallWinner { get; set; }
-    public List<string> ConnectedPlayerNames { get; set; } = new List<string>();
-    public int PlayerCount { get; set; }
-    public List<GameRound> FullGameHistory { get; set; } = new List<GameRound>();
-}
-#endregion
 
 public class AdminClientSDK : IAsyncDisposable
 {

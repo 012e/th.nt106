@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using THMang1.Models;
 
 namespace THMang1.Client;
 
@@ -146,6 +147,12 @@ public class GameClientSDK : IAsyncDisposable
 
         _hubConnection.On<string>("Error", async (errorMsg) => // Generic error handler
             ErrorReceived?.Invoke(errorMsg));
+
+        _hubConnection.On<AdminDashboardData>("AdminInitialState", async (dashboardData) =>
+        {
+            Console.WriteLine(dashboardData);
+        });
+
 
 
         // --- Handle connection lifecycle events ---
