@@ -145,21 +145,8 @@ public class GameClientSDK : IAsyncDisposable
 
         _hubConnection.On<string?, string, string>("GameFinished", async (winner, url, details) =>
         {
-            try
-            {
-                // Open browser to the history URL
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Can't open browser: {ex.Message}");
-            }
             GameFinished?.Invoke(winner, url, details);
-    });
+        });
 
         _hubConnection.On<string>("Error", async (errorMsg) => // Generic error handler
             ErrorReceived?.Invoke(errorMsg));

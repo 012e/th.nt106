@@ -1,54 +1,94 @@
-=== GAME ĐOÁN SỐ - Game History (2025-05-24 19:03:10 UTC) ===
-Total Rounds Played: 5 out of 5 planned.
+=== GAME ĐOÁN SỐ - Game History (2025-05-24 19:25:02 UTC) ===
+Total Rounds Played: 9 out of 9 planned.
 
 --- Round 1 ---
-Range: 2 < X < 146
-Secret Number: 24
-Started: 19:02:33
-Ended: 19:02:40
-Winner: Player41
+Range: 22 < X < 52
+Secret Number: 29
+Started: 19:23:41
+Ended: 19:23:47
+Winner: Player49
 Guesses:
-  - Player41: 24 (Correct) at 19:02:40
+  - Player49: 29 (Correct) at 19:23:47
 
 --- Round 2 ---
-Range: 17 < X < 66
-Secret Number: 18
-Started: 19:02:43
-Ended: 19:02:48
-Winner: Player83
+Range: 38 < X < 66
+Secret Number: 39
+Started: 19:23:50
+Ended: 19:23:54
+Winner: Player49
 Guesses:
-  - Player83: 18 (Correct) at 19:02:48
+  - Player49: 39 (Correct) at 19:23:54
 
 --- Round 3 ---
-Range: 47 < X < 106
-Secret Number: 89
-Started: 19:02:51
-Ended: 19:02:54
-Winner: Player83
+Range: 21 < X < 92
+Secret Number: 45
+Started: 19:23:57
+Ended: 19:24:00
+Winner: Player49
 Guesses:
-  - Player83: 89 (Correct) at 19:02:54
+  - Player49: 45 (Correct) at 19:24:00
 
 --- Round 4 ---
-Range: 11 < X < 121
-Secret Number: 53
-Started: 19:02:57
-Ended: 19:03:04
-Winner: Player83
+Range: 1 < X < 149
+Secret Number: 43
+Started: 19:24:03
+Ended: 19:24:06
+Winner: Player28
 Guesses:
-  - Player83: 54 (Too high.) at 19:03:00
-  - Player83: 53 (Correct) at 19:03:04
+  - Player28: 43 (Correct) at 19:24:06
 
 --- Round 5 ---
-Range: 37 < X < 122
-Secret Number: 116
-Started: 19:03:07
-Ended: 19:03:10
-Winner: Player83
+Range: 22 < X < 37
+Secret Number: 28
+Started: 19:24:09
+Ended: 19:24:17
+Winner: Player28
 Guesses:
-  - Player83: 116 (Correct) at 19:03:10
+  - Player28: 28 (Correct) at 19:24:17
+
+--- Round 6 ---
+Range: 8 < X < 78
+Secret Number: 43
+Started: 19:24:21
+Ended: 19:24:24
+Winner: Player49
+Guesses:
+  - Player49: 43 (Correct) at 19:24:24
+
+--- Round 7 ---
+Range: 37 < X < 123
+Secret Number: 41
+Started: 19:24:27
+Ended: 19:24:36
+Winner: Player28
+Guesses:
+  - Player28: 39 (Too low.) at 19:24:31
+  - Player28: 41 (Correct) at 19:24:36
+
+--- Round 8 ---
+Range: 42 < X < 118
+Secret Number: 61
+Started: 19:24:39
+Ended: 19:24:42
+Winner: Player28
+Guesses:
+  - Player28: 61 (Correct) at 19:24:42
+
+--- Round 9 ---
+Range: 25 < X < 52
+Secret Number: 40
+Started: 19:24:45
+Ended: 19:25:02
+Winner: Player49
+Guesses:
+  - Player28: 49 (Too high.) at 19:24:49
+  - Player49: 51 (Too high.) at 19:24:51
+  - Player49: 50 (Too high.) at 19:24:55
+  - Player28: 33 (Too low.) at 19:25:00
+  - Player49: 40 (Correct) at 19:25:02
 
 --- Player Stats ---
-- Player83: 4 wins, 1 incorrect guesses, Score: 39
-- Player41: 1 wins, 0 incorrect guesses, Score: 10
+- Player49: 5 wins, 2 incorrect guesses, Score: 48
+- Player28: 4 wins, 3 incorrect guesses, Score: 37
 
-Overall Winner: Player83
+Overall Winner: Player49

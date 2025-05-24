@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -263,6 +264,20 @@ namespace THMang1.Server.Services
 
             _logger.LogInformation($"Overall Winner: {overallWinner ?? "N/A"}. History URL: {historyUrl}");
             _logger.LogInformation($"Formatted History:\n{historyDetails}");
+
+            try
+            {
+                // Open browser to the history URL
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = historyUrl,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Can't open browser: {ex.Message}");
+            }
 
             await Clients.Group("GamePlayers").SendAsync("GameFinished", overallWinner, historyUrl, historyDetails);
 
