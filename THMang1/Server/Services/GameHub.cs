@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using THMang1.Models;
 
@@ -179,18 +181,92 @@ namespace THMang1.Server.Services
             }
         }
 
+        private async Task<string> UploadHistoryToHastebinAsync(string content)
+        {
+            using var httpClient = new HttpClient();
+
+            const string hastebinApiToken = "7fa140911b0034a9a1587910f00d7a33ff78bacd1eda82cd8e87bacc4e8d8feac73e76a9db34e04603c9ba3b3e2903e9e76f564d3fd532517e23e40ccb750386";
+
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", hastebinApiToken);
+
+            using var stringContent = new StringContent(content, Encoding.UTF8, "text/plain");
+
+            try
+            {
+                var response = await httpClient.PostAsync("https://hastebin.com/documents", stringContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    _logger.LogError("Upload failed to Hastebin. Status: {StatusCode}. Error Content: {ErrorContent}", response.StatusCode, errorContent);
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) // 401
+                    {
+                        _logger.LogError("Hastebin API Error: Unauthorized. Check your API token.");
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.Forbidden) // 403
+                    {
+                        _logger.LogError("Hastebin API Error: Forbidden. Your account might be blocked or T&C not accepted.");
+                    }
+                    else if (response.StatusCode == (System.Net.HttpStatusCode)413) // Payload Too Large
+                    {
+                        _logger.LogError("Hastebin API Error: Payload too large. Document limit is 400,000 characters or 1MB.");
+                    }
+                    return "Upload failed";
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation("Hastebin Raw JSON Response: {Json}", json);
+
+                var jsonDoc = System.Text.Json.JsonDocument.Parse(json);
+
+                if (jsonDoc.RootElement.TryGetProperty("key", out var keyElement))
+                {
+                    string key = keyElement.GetString() ?? "";
+                    // URL chuẩn để xem paste: https://hastebin.com/{key}
+                    string url = $"https://hastebin.com/share/{key}";
+                    return url;
+                }
+                else
+                {
+                    _logger.LogError("Upload to Hastebin succeeded but no 'key' returned in JSON. Full JSON: {Json}", json);
+                    return "Upload failed: Missing key in response";
+                }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                _logger.LogError(httpEx, "HTTP Request Exception while uploading to Hastebin: {Message}", httpEx.Message);
+                return "Upload failed: Network or HTTP error";
+            }
+            catch (JsonException jsonEx)
+            {
+                _logger.LogError(jsonEx, "JSON Parsing Exception while uploading to Hastebin: {Message}", jsonEx.Message);
+                return "Upload failed: Invalid JSON response";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "General Exception while uploading to Hastebin: {Message}", ex.Message);
+                return "Upload failed: An unexpected error occurred";
+            }
+        }
+
+
         private async Task HandleGameFinished()
         {
             _logger.LogInformation("Game has finished. Calculating overall winner and notifying clients.");
             string? overallWinner = _gameService.GetOverallWinner();
             string historyDetails = _gameService.FormatHistoryForUpload();
-            string historyUrl = "History upload to ctxt.io not implemented in this step."; // Placeholder
+
+            string historyUrl = await UploadHistoryToHastebinAsync(historyDetails);
 
             _logger.LogInformation($"Overall Winner: {overallWinner ?? "N/A"}. History URL: {historyUrl}");
             _logger.LogInformation($"Formatted History:\n{historyDetails}");
 
             await Clients.Group("GamePlayers").SendAsync("GameFinished", overallWinner, historyUrl, historyDetails);
-            await BroadcastAdminFullStateUpdate(); // Game finished, send final state to admin
+
+            await BroadcastAdminFullStateUpdate();
         }
 
         private async Task HandleGameFinishedForCaller() // When a player joins a finished game
@@ -198,7 +274,7 @@ namespace THMang1.Server.Services
             _logger.LogInformation($"Notifying joining player {Context.ConnectionId} that game has finished.");
             string? overallWinner = _gameService.GetOverallWinner();
             string historyDetails = _gameService.FormatHistoryForUpload();
-            string historyUrl = "History upload to ctxt.io not implemented in this step.";
+            string historyUrl = await UploadHistoryToHastebinAsync(historyDetails);
             await Clients.Caller.SendAsync("GameFinished", overallWinner, historyUrl, historyDetails);
             // No admin broadcast needed here as the game state hasn't changed for admins
         }

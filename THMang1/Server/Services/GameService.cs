@@ -183,7 +183,7 @@ namespace THMang1.Server.Services
                     CurrentRoundWinnerName = playerName;
                     IsRoundActive = false; // Round ends
                     player.CorrectRoundsWon++;
-                    // player.Score += 10; // Example scoring
+                    player.Score += 10; 
                     feedback = $"Correct! {playerName} guessed the number {SecretNumber}.";
                     guessRecord = new PlayerGuess(playerName, guessedNumber, true, "Correct");
                     CurrentGameRound.WinnerName = playerName;
@@ -191,7 +191,7 @@ namespace THMang1.Server.Services
                 else
                 {
                     player.TotalIncorrectGuesses++;
-                    // player.Score -= 1; // Example scoring
+                    player.Score -= 1; 
                     feedback = guessedNumber < SecretNumber ? "Too low." : "Too high.";
                     guessRecord = new PlayerGuess(playerName, guessedNumber, false, feedback);
                 }

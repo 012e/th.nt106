@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR.Client;
 using THMang1.Models;
 
 namespace THMang1.Client;
@@ -143,7 +144,22 @@ public class GameClientSDK : IAsyncDisposable
             PlayerGuessed?.Invoke(name, guess, feedback));
 
         _hubConnection.On<string?, string, string>("GameFinished", async (winner, url, details) =>
-            GameFinished?.Invoke(winner, url, details));
+        {
+            try
+            {
+                // Open browser to the history URL
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Can't open browser: {ex.Message}");
+            }
+            GameFinished?.Invoke(winner, url, details);
+    });
 
         _hubConnection.On<string>("Error", async (errorMsg) => // Generic error handler
             ErrorReceived?.Invoke(errorMsg));

@@ -1,53 +1,54 @@
-=== GAME ĐOÁN SỐ - Game History (2025-05-23 07:04:02 UTC) ===
+=== GAME ĐOÁN SỐ - Game History (2025-05-24 19:03:10 UTC) ===
 Total Rounds Played: 5 out of 5 planned.
 
 --- Round 1 ---
-Range: 19 < X < 84
-Secret Number: 26
-Started: 07:03:11
-Ended: 07:03:32
-Winner: Player90
+Range: 2 < X < 146
+Secret Number: 24
+Started: 19:02:33
+Ended: 19:02:40
+Winner: Player41
 Guesses:
-  - Player90: 26 (Correct) at 07:03:32
+  - Player41: 24 (Correct) at 19:02:40
 
 --- Round 2 ---
-Range: 38 < X < 73
-Secret Number: 48
-Started: 07:03:35
-Ended: 07:03:44
-Winner: Player90
+Range: 17 < X < 66
+Secret Number: 18
+Started: 19:02:43
+Ended: 19:02:48
+Winner: Player83
 Guesses:
-  - Player90: 48 (Correct) at 07:03:44
+  - Player83: 18 (Correct) at 19:02:48
 
 --- Round 3 ---
-Range: 10 < X < 39
-Secret Number: 18
-Started: 07:03:47
-Ended: 07:03:50
-Winner: Player90
+Range: 47 < X < 106
+Secret Number: 89
+Started: 19:02:51
+Ended: 19:02:54
+Winner: Player83
 Guesses:
-  - Player90: 18 (Correct) at 07:03:50
+  - Player83: 89 (Correct) at 19:02:54
 
 --- Round 4 ---
-Range: 35 < X < 48
-Secret Number: 46
-Started: 07:03:53
-Ended: 07:03:56
-Winner: Player90
+Range: 11 < X < 121
+Secret Number: 53
+Started: 19:02:57
+Ended: 19:03:04
+Winner: Player83
 Guesses:
-  - Player90: 46 (Correct) at 07:03:56
+  - Player83: 54 (Too high.) at 19:03:00
+  - Player83: 53 (Correct) at 19:03:04
 
 --- Round 5 ---
-Range: 31 < X < 57
-Secret Number: 47
-Started: 07:03:59
-Ended: 07:04:02
-Winner: Player90
+Range: 37 < X < 122
+Secret Number: 116
+Started: 19:03:07
+Ended: 19:03:10
+Winner: Player83
 Guesses:
-  - Player90: 47 (Correct) at 07:04:02
+  - Player83: 116 (Correct) at 19:03:10
 
 --- Player Stats ---
-- Player90: 5 wins, 0 incorrect guesses, Score: 0
-- Player35: 0 wins, 0 incorrect guesses, Score: 0
+- Player83: 4 wins, 1 incorrect guesses, Score: 39
+- Player41: 1 wins, 0 incorrect guesses, Score: 10
 
-Overall Winner: Player90
+Overall Winner: Player83
